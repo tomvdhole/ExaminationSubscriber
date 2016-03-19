@@ -4,10 +4,7 @@ from django.core.validators import RegexValidator
 # Create your models here.
 
 BELT_TO_GRADE = (
-#!!!!! to check voor de groene streepjes !!!!!!
     ("0e Kyu", "Witte gordel"),
-    ("0e Kyu", "Witte gordel met groen streepje"),
-    ("0e Kyu", "Witte gordel met twee groene streepjes"),
     ("9e Kyu", "Witte gordel met zwart streepje"),
     ("9e Kyu", "Rode gordel"),
     ("8e Kyu", "Gele gordel"),
@@ -39,9 +36,26 @@ EXAMINATION_TYPE = (
     ("Official", "Officieel"),
 )
 
+class Category(models.Model):
+    type_of_competitors = models.CharField(max_length=20, choices=TYPE_OF_COMPETITORS)
+    examination_type = models.CharField(max_length=10, choices= EXAMINATION_TYPE)
+
+    def __str__(self):
+        return self.type_of_competitors + " " + self.examination_type
+
+
 class Participant(models.Model):
     last_name = models.CharField(max_length=30)
     first_name = models.CharField(max_length=30)
+    gsm = models.CharField(
+        max_length=10,
+        validators=[
+            RegexValidator(
+                r"^04[0-9]{8}$",
+                "GSM number must consists of 10 numbers and it must start with a 0!"
+            )
+        ])
+    email = models.EmailField()
     license_number = models.CharField(
         max_length=6,
         validators=[
@@ -51,17 +65,18 @@ class Participant(models.Model):
             )
         ]
     )
-    color_belt = models.CharField(max_length=6, choices=BELT_TO_GRADE)
+    grade = models.CharField(max_length=6, choices=BELT_TO_GRADE)
     number_of_red_ribbons = models.PositiveSmallIntegerField(choices=RED_RIBBONS)
-    age = models.PositiveSmallIntegerField()
+    age = models.CharField(
+        max_length=2,
+        validators= [
+            RegexValidator(
+                r"^[0-9]{1,2}$",
+                "Age must consists of a numerical value of maximum 2 figures!"
+            )
+        ]
+    )
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
-
-
-class Category(models.Model):
-    type_of_competitors = models.CharField(max_length=20, choices=TYPE_OF_COMPETITORS)
-    examination_type = models.CharField(max_length=10, choices= EXAMINATION_TYPE)
-
-    def __str__(self):
-        return self.type_of_competitors + " " + self.examination_type
