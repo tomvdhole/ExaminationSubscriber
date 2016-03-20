@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import ParticipantForm
-from .models import Category, Participant
+from .models import Participant
 
 # Create your views here.
 def index(request):

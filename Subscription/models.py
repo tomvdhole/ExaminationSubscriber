@@ -1,12 +1,10 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
-
 BELT_TO_GRADE = (("0e Kyu", "Witte gordel"), ("9e Kyu", "Witte gordel met zwart streepje"), ("9e Kyu", "Rode gordel"), ("8e Kyu", "Gele gordel"), ("7e Kyu", "Oranje gordel"), ("6e Kyu", "Groene gordel"), ("5e Kyu", "Blauwe gordel"), ("4e Kyu", "Blauwe gordel met wit streepje"), ("3e Kyu", "Bruine gordel"), ("2e Kyu", "Bruine gordel met wit streepje"), ("1e Kyu", "Bruine gordel met twee witte streepjes"), )
 RED_RIBBONS = ((0, "0"), (1, "1"), (2, "2"),)
 TYPE_OF_COMPETITORS = (("Beginners", "Beginners"), ("Advanced", "Gevorderden"), ("Kids", "Kinderen"), ("Youth", "Jeugd"),)
 EXAMINATION_TYPE = (("Form", "Vorm"), ("Rhytm", "Ritme"), ("Official", "Officieel"),)
-
 
 class Category(models.Model):
     type_of_competitors = models.CharField(max_length=20, choices=TYPE_OF_COMPETITORS)
@@ -14,7 +12,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.type_of_competitors + " " + self.examination_type
-
 
 class Participant(models.Model):
     last_name = models.CharField(max_length=30)
@@ -27,15 +24,6 @@ class Participant(models.Model):
     age = models.CharField(max_length=2, validators= [RegexValidator(r"^[0-9]{1,2}$", "Age must consists of a numerical value of maximum 2 figures!")])
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, blank=True)
 
-    '''
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        print('in init')
-        print('leeftijd: ' + str(self.age))
-        print('rode streepjes' + str(self.number_of_red_ribbons))
-        self.__save_data()
-    '''
-
     def __str__(self):
         return self.first_name + " " + self.last_name
 
@@ -44,22 +32,15 @@ class Participant(models.Model):
         self.__save_data()
         super().save(*args, **kwargs)
 
+    #private method
     def __save_data(self):
-        print("before adding category")
-        print("saved status " + str(self.__saved))
-        print("leeftijd " +  str(self.age))
-        print("rode lintjes " + str(self.number_of_red_ribbons))
         if self.age == '7' and (self.number_of_red_ribbons == 0 or self.number_of_red_ribbons == 1):
             if self.number_of_red_ribbons == 0:
                 self.category = Category.objects.get(type_of_competitors='Kids', examination_type='Form')
-                print("added category")
                 self.__saved = True
             if self.number_of_red_ribbons == 1:
                 self.category = Category.objects.get(type_of_competitors='Kids', examination_type='Rhytm')
-                print("added category")
                 self.__saved = True
-        else:
-            print("geen categorie toegevoegd")
 
     @property
     def saved(self):
