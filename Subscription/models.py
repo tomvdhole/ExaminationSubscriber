@@ -27,22 +27,39 @@ class Participant(models.Model):
     age = models.CharField(max_length=2, validators= [RegexValidator(r"^[0-9]{1,2}$", "Age must consists of a numerical value of maximum 2 figures!")])
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, blank=True)
 
+    '''
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        print('in init')
+        print('leeftijd: ' + str(self.age))
+        print('rode streepjes' + str(self.number_of_red_ribbons))
         self.__save_data()
+    '''
 
     def __str__(self):
         return self.first_name + " " + self.last_name
 
-    def __save_data(self):
+    def save(self, *args, **kwargs):
         self.__saved = False
-        if self.age == 7 and (self.number_of_red_ribbons == 0 or self.number_of_red_ribbons == 1):
+        self.__save_data()
+        super().save(*args, **kwargs)
+
+    def __save_data(self):
+        print("before adding category")
+        print("saved status " + str(self.__saved))
+        print("leeftijd " +  str(self.age))
+        print("rode lintjes " + str(self.number_of_red_ribbons))
+        if self.age == '7' and (self.number_of_red_ribbons == 0 or self.number_of_red_ribbons == 1):
             if self.number_of_red_ribbons == 0:
                 self.category = Category.objects.get(type_of_competitors='Kids', examination_type='Form')
+                print("added category")
                 self.__saved = True
             if self.number_of_red_ribbons == 1:
                 self.category = Category.objects.get(type_of_competitors='Kids', examination_type='Rhytm')
+                print("added category")
                 self.__saved = True
+        else:
+            print("geen categorie toegevoegd")
 
     @property
     def saved(self):
