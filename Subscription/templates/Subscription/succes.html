@@ -3,10 +3,10 @@
 {% block content %}
   <p>Hi there!</p>
   <p>It works! ingeschreven die handel</p>
-  {% if saved %}
+  {% if saved == 'True'%}
             het is gesaved
   {% endif %}
-  {% if not saved %}
+  {% if saved == 'False' %}
             U voldeed niet aan de voorwaarden om deel te nemen aan het examen
             U bent jonger dan 7 jaar of u bent 7 jaar en heeft 2 rode streepjes
             Indien dit niet het geval is gelieve contact te nemen met Petra!
