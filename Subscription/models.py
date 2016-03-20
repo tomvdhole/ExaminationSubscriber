@@ -30,7 +30,8 @@ class Participant(models.Model):
     def save(self, *args, **kwargs):
         self.__saved = False
         self.__save_data()
-        super().save(*args, **kwargs)
+        if self.__saved == True:
+            super().save(*args, **kwargs)
 
     #private method
     def __save_data(self):
