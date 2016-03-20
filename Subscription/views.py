@@ -17,6 +17,7 @@ def subscribe(request):
         form = ParticipantForm(request.POST)
         if form.is_valid():
             saved = __save_data(form)
+            #define_category
             return redirect('succes', saved=saved)
         else:
             return render(request, 'Subscription/subscribe.html', {'form' : form})
