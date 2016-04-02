@@ -1,19 +1,32 @@
 {% extends 'Subscription/base.html' %}
 
 {% block content %}
-  <p>subscribe</p>
-  <form method="POST">
-    {% csrf_token %}
-    {% for field in form %}
-      <div class="fieldWrapper">
-          {{ field.label_tag }}
-          {{ field }}
-          {{ field.errors }}
-          {% if field.help_text %}
-            <p class="help">{{ field.help_text|safe }}</p>
-          {% endif %}
+<form method="POST">
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="fieldWrapper">
+      <div class="row">
+      <div class="col-md-12">
+        {{ field.label_tag }}
       </div>
-    {% endfor %}
-    <button type="submit">Save</button>
-  </form>
+      </div>
+      <div class="col-md-12">
+        {{ field }}
+      </div>
+      <div class="col-md-12">
+        {{ field.errors }}
+      </div>
+      <div class="col-md-12">
+      {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+      {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+  </br>
+  </br>
+  <div class="col-md-12">
+    <button type="submit" class="btn btn-primary btn-lg">Inschrijven</button>
+  </div>
+</form>
 {% endblock %}

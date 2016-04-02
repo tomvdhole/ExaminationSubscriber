@@ -1,0 +1,39 @@
+body{
+  background: url(../images/belts.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+html, body{height:100%; margin:0;padding:0}
+
+.container-fluid{
+  height:100%;
+  display:table;
+  width: 100%;
+  padding: 0;
+}
+
+.row-fluid {height: 100%; display:table-cell; vertical-align: middle;}
+
+.centering {
+  float:none;
+  margin:0 auto;
+}
+
+.container-layout{
+  background-color: #888888;
+  border-style: solid;
+  border-width: 5px;
+}
+
+#Taisho_Logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.panel-width{
+  width: 55%;    
+}

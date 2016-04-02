@@ -44,6 +44,11 @@ class Participant(models.Model):
             if self.number_of_red_ribbons == 1:
                 self.category = Category.objects.get(type_of_participants='Kids', examination_type='Rhytm')
                 self.__saved = True
+        #officieel
+        if (self.age >= 8 and self.age < 11) and (grade == "0e Kyu" or grade == "9e Kyu" or grade == "8e Kyu" or grade == "7e Kyu" or grade == "6e Kyu"):
+            if self.number_of_red_ribbons == 0:
+                self.category = Category.objects.get(type_of_participants='Kids', examination_type='Form')
+                self.__saved = True
 
     @property
     def saved(self):

@@ -1,17 +1,35 @@
-<html>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
         <title>Taisho Examen App</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <!-- Own CSS -->
+        <link rel="stylesheet" href="{% static 'Subscription/css/subscription.css' %}">
     </head>
     <body>
-      <div class="content container">
-          <div class="row">
-            <div class="col-md-8">
-            {% block content %}
-            {% endblock %}
-            </div>
+      <div class="container-fluid">
+        <div class="row-fluid">
+              <div class="panel panel-default panel-width centering text-center">
+                <div class="panel-body container-layout">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <a href="/"><img src="../../static/Subscription/images/Taisho.gif" class="media-object" alt="Taisho Lede" id="Taisho_Logo"></a></br>
+                    </div>
+                  </div>
+                  <div class="row">
+                    {% block content %}
+                    {% endblock %}
+                  </div>
+                </div>
+              </div>
           </div>
-      </div>
+        </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </body>
 </html>
