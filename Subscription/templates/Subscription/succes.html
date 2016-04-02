@@ -3,12 +3,15 @@
 {% block content %}
 <div class="col-md-12">
 {% if saved == 'True'%}
-      het is gesaved
+      <h4>Proficiat! </br>
+      U bent ingeschreven voor het examen! </br>
+      Indien u technische vragen heeft kan u zich wenden tot onze <a href="http://www.taisho-lede.be/volwassenen/onze-trainers/sensei-meert-jean-pierre/" target="_blank" class="weblinks">Sensei</a>!</br>
+      Indien u administratieve vragen heeft kan u zich wenden tot <a href="http://www.taisho-lede.be/volwassenen/onze-trainers/petra-van-gheit/" target="_blank" class="weblinks">Petra</a>!</br></h4>
 {% endif %}
 {% if saved == 'False' %}
-                   U voldeed niet aan de voorwaarden om deel te nemen aan het examen
-                   U bent jonger dan 7 jaar of u bent 7 jaar en heeft 2 rode streepjes
-                 Indien dit niet het geval is gelieve contact te nemen met Petra!
+      <h4>Sorry!</br>
+      U voldeed niet aan de voorwaarden om deel te nemen aan het examen.</br>
+      Gelieve contact te nemen met <a href="http://www.taisho-lede.be/volwassenen/onze-trainers/petra-van-gheit/" target="_blank" class="weblinks">Petra</a> voor meer uitleg.</h4>
 {% endif %}
 </div>
 {% endblock %}
