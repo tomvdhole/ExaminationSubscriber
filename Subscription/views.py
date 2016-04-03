@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .forms import ParticipantForm
 from .models import Participant
 from .reports import SubscriptionReport
+from openpyxl.writer.excel import save_virtual_workbook
 
 # Create your views here.
 def index(request):
@@ -28,9 +29,7 @@ def reports(request):
     return render(request, 'Subscription/reports.html', {})
 
 def download_report(request):
-    # report = SubscriptionReport()
-    # response = HttpResponse(report.create_reports(), mimetype='application/ms-excel')
-    # response['Content-Disposition'] = 'attachment; filename=Reports.xlsx'
-    # return response
-    print("in download report")
-    return render(request, 'Subscription/index.html', {})
+    report = SubscriptionReport()
+    response = HttpResponse(save_virtual_workbook(report.create_reports()), content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=Reports.xlsx'
+    return response
