@@ -6,7 +6,6 @@ from openpyxl.styles import Font
 
 class SubscriptionReport:
     def __init__(self):
-        self.__column = 3
         self.__workbook = Workbook()
 
     def create_reports(self):
