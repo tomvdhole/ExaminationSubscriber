@@ -125,25 +125,25 @@ class SubscriptionReport:
         self.__ws.cell(column = 9, row = 10, value = 'Email').font = Font(bold = True)
 
     def __fill_report(self, participants):
-        self.__column = 1
-        self.__row = 11
+        column = 1
+        row = 11
         for participant in participants:
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.last_name)
-            self.__column += 1
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.first_name)
-            self.__column += 1
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.age)
-            self.__column += 1
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.grade)
-            self.__column += 1
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.number_of_red_ribbons)
-            self.__column += 1
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.license_number)
-            self.__column += 1
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.date_till_license_is_valid)
-            self.__column += 1
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.gsm)
-            self.__column += 1
-            self.__ws.cell(column = self.__column, row = self.__row, value = participant.email)
-            self.__row += 1
-            self.__column = 1
+            self.__ws.cell(column = column, row = row, value = participant.last_name)
+            column += 1
+            self.__ws.cell(column = column, row = row, value = participant.first_name)
+            column += 1
+            self.__ws.cell(column = column, row = row, value = participant.age)
+            column += 1
+            self.__ws.cell(column = column, row = row, value = participant.grade)
+            column += 1
+            self.__ws.cell(column = column, row = row, value = participant.number_of_red_ribbons)
+            column += 1
+            self.__ws.cell(column = column, row = row, value = participant.license_number)
+            column += 1
+            self.__ws.cell(column = column, row = row, value = participant.date_till_license_is_valid)
+            column += 1
+            self.__ws.cell(column = column, row = row, value = participant.gsm)
+            column += 1
+            self.__ws.cell(column = column, row = row, value = participant.email)
+            row += 1
+            column = 1
