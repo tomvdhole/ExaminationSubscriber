@@ -5,6 +5,9 @@ from .models import Participant
 from .reports import SubscriptionReport
 from openpyxl.writer.excel import save_virtual_workbook
 
+'''
+Views bepalen welke webpagina of welk report er opgeroepen gaat worden
+'''
 # Create your views here.
 def index(request):
     return render(request, 'Subscription/index.html', {})

@@ -1,6 +1,10 @@
 from django.conf.urls import url
 from . import views
 
+'''
+Beschrijft welke url welke view oproept
+'''
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^reports/download_report/', views.download_report, name='download_report'),

@@ -5,6 +5,10 @@ from openpyxl.drawing.image import Image
 from openpyxl.styles import Font
 
 class SubscriptionReport:
+    '''
+    Klasse die zorgt voor het genereren van een report, voor elk type categorie maken we een nieuwe sheet in excel
+    '''
+
     def __init__(self):
         self.__workbook = Workbook()
 

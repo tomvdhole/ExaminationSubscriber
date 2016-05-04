@@ -1,12 +1,21 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+'''
+BELT_TO_GRADE, RED_RIBBONS, TYPE_OF_PARTICIPANTS, EXAMINATION_TYPE zijn variabelen die hieronder opgevuld worden, met verschillende waarden waaruit men kan selecteren
+bvb: wanneer iemand witte gordel met zwart streepje selecteert, schrijven we 9e kyu weg
+'''
 BELT_TO_GRADE = (("0e Kyu", "Witte gordel"), ("9e Kyu", "Witte gordel met zwart streepje"), ("9e Kyu", "Rode gordel"), ("8e Kyu", "Gele gordel"), ("7e Kyu", "Oranje gordel"), ("6e Kyu", "Groene gordel"), ("5e Kyu", "Blauwe gordel"), ("4e Kyu", "Blauwe gordel met wit streepje"), ("3e Kyu", "Bruine gordel"), ("2e Kyu", "Bruine gordel met wit streepje"),)
 RED_RIBBONS = ((0, "0"), (1, "1"), (2, "2"),)
 TYPE_OF_PARTICIPANTS = (("Beginners", "Beginners"), ("Advanced", "Gevorderden"), ("Kids", "Kinderen"), ("Youth", "Jeugd"),)
 EXAMINATION_TYPE = (("Form", "Vorm"), ("Rhytm", "Ritme"), ("Official", "Officieel"),)
 
 class Category(models.Model):
+    '''
+    Klasse die de verschillende categorieën, waarvoor men zich kan inschrijven weergeeft.
+    vb:
+        cat = new Category(type_of_participants='Kids', examination_type='Form')
+    '''
     type_of_participants = models.CharField(max_length=20, choices=TYPE_OF_PARTICIPANTS)
     examination_type = models.CharField(max_length=10, choices= EXAMINATION_TYPE)
 
@@ -14,6 +23,10 @@ class Category(models.Model):
         return self.type_of_participants + " " + self.examination_type
 
 class Participant(models.Model):
+    '''
+    Klasse die een deelnemer aan het examen modeleert, in de save method roepen we de __save_data method aan waarin we de input van de user verifieren en aan de hand van deze input bepalen we de
+    categorie.
+    '''
     last_name = models.CharField(max_length=30, verbose_name="Naam")
     first_name = models.CharField(max_length=30, verbose_name="Voornaam")
     gsm = models.CharField(max_length=10, validators=[RegexValidator(r"^04[0-9]{8}$", "GSM nummer moet bestaan uit 10 nummers en het moet starten met 04!")], verbose_name="Gsm")
