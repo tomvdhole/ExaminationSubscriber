@@ -50,6 +50,7 @@ class Participant(models.Model):
     #private method
     def __save_data(self):
         self.age = int(self.age)
+        self.number_of_red_ribbons = int(self.number_of_red_ribbons)
 
         if self.age == 7 and (self.number_of_red_ribbons == 0 or self.number_of_red_ribbons == 1):
             if self.number_of_red_ribbons == 0:
@@ -72,7 +73,7 @@ class Participant(models.Model):
 
         if (self.age >= 11 and self.age < 14) and (self.grade == "0e Kyu" or self.grade == "9e Kyu" or self.grade == "8e Kyu" or self.grade == "7e Kyu" or self.grade == "6e Kyu"):
             if self.number_of_red_ribbons == 0:
-                self.Category = Category.objects.get(type_of_participants='Youth', examination_type='Form')
+                self.category = Category.objects.get(type_of_participants='Youth', examination_type='Form')
                 self.__saved = True
             if self.number_of_red_ribbons == 1:
                 self.category = Category.objects.get(type_of_participants='Youth', examination_type='Rhytm')
@@ -83,7 +84,7 @@ class Participant(models.Model):
 
         if self.age >= 14 and (self.grade == "0e Kyu" or self.grade == "9e Kyu" or self.grade == "8e Kyu" or self.grade == "7e Kyu" or self.grade == "6e Kyu"):
             if self.number_of_red_ribbons == 0:
-                self.Category = Category.objects.get(type_of_participants='Beginners', examination_type='Form')
+                self.category = Category.objects.get(type_of_participants='Beginners', examination_type='Form')
                 self.__saved = True
             if self.number_of_red_ribbons == 1:
                 self.category = Category.objects.get(type_of_participants='Beginners', examination_type='Rhytm')
@@ -94,7 +95,7 @@ class Participant(models.Model):
 
         if self.grade == "5e Kyu" or self.grade == "4e Kyu" or self.grade == "3e Kyu" or self.grade == "2e Kyu":
             if self.number_of_red_ribbons == 0:
-                self.Category = Category.objects.get(type_of_participants='Advanced', examination_type='Form')
+                self.category = Category.objects.get(type_of_participants='Advanced', examination_type='Form')
                 self.__saved = True
             if self.number_of_red_ribbons == 1:
                 self.category = Category.objects.get(type_of_participants='Advanced', examination_type='Rhytm')
