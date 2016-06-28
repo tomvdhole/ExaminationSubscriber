@@ -34,7 +34,7 @@ class Participant(models.Model):
     license_number = models.CharField(max_length=6, validators=[RegexValidator(r"^[0-9]{1,6}$", "Licentie nummer mag enkel bestaan uit maximum 6 cijfers!")], verbose_name="Licentienummer")
     date_till_license_is_valid = models.DateField(verbose_name="Licentie geldigheids datum")
     grade = models.CharField(max_length=6, choices=BELT_TO_GRADE, verbose_name="Graad")
-    number_of_red_ribbons = models.PositiveSmallIntegerField(choices=RED_RIBBONS, verbose_name="Aantal rode lintjes")
+    number_of_red_ribbons = models.PositiveSmallIntegerField(choices=RED_RIBBONS, verbose_name="Aantal rode lintjes of aantal witte lintjes op rode gordel")
     age = models.CharField(max_length=2, validators= [RegexValidator(r"^[0-9]{1,2}$", "Leeftijd moet bestaan uit maximum 2 cijfers!")], verbose_name="Leeftijd")
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, blank=True)
 
